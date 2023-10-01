@@ -12,6 +12,14 @@ export class DoublyNode extends Node{
     }
 }
 
+export class TreeNode{
+    constructor(key){
+        this.key=key;
+        this.left= null;
+        this.right = null;
+    }
+}
+
 export function defaultEquals(a,b){
     return a===b;
 }
