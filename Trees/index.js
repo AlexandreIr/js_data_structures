@@ -19,5 +19,7 @@ tree.insert(25)
 tree.insert(6)
 
 const cons=(data)=> console.log(data)
-tree.inOrderTransverse(cons)
+tree.preOrderTransverse(cons)
+
+
 

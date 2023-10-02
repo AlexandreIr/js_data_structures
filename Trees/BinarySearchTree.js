@@ -1,14 +1,19 @@
 import { Compare, TreeNode, defaultCompare } from "../Aux_classes/Utils.js";
 
 export default class BinarySearchTree{
+    #root
     constructor(compareFn=defaultCompare){
         this.compareFn=compareFn;
-        this.root=null
+        this.#root=null
+    }
+
+    get root(){
+        return this.#root
     }
 
     insert(key){
-        if(this.root==null) this.root= new TreeNode(key);
-        else this.#insertNode(this.root, key);
+        if(this.#root==null) this.#root= new TreeNode(key);
+        else this.#insertNode(this.#root, key);
     }
 
     #insertNode(node, key){
@@ -36,8 +41,18 @@ export default class BinarySearchTree{
     }
 
     inOrderTransverse(clbFn){
-        this.#inOrderTransverseNode(this.root, clbFn)
+        this.#inOrderTransverseNode(this.#root, clbFn);
     }
 
-    
+    #preOderTrasnverseNode(node, clbFn){
+        if(node!=null){
+            clbFn(node.key)
+            this.#preOderTrasnverseNode(node.left, clbFn);
+            this.#preOderTrasnverseNode(node.right, clbFn);
+        }
+    }
+
+    preOrderTransverse(clbFn){
+        this.#preOderTrasnverseNode(this.#root, clbFn)
+    }
 }
