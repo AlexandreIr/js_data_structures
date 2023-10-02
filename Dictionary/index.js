@@ -1,23 +1,6 @@
 import { Dictionary } from "./Dictionary.js";
 import { HashTable } from "./HashTable.js";
 
-// const dictionary=new Dictionary();
-
-// dictionary.set('Gandalf', 'gandalfthegray@gmail.com');
-// dictionary.set('Gimli', 'gimli@gmail.com');
-// dictionary.set('Legolas', 'legolastheeagle@yahoo.com');
-
-// console.log(dictionary.hasKey('Gimli'));
-// console.log(dictionary.isEmpty());
-// console.log(dictionary.size());
-// console.log(dictionary.keys());
-// console.log(dictionary.values());
-// console.log(dictionary.get('Legolas'));
-
-// dictionary.forEach((k, v)=>{
-//     console.log('forEach:', `Key:${k}, value: ${v}`)
-// })
-
 const hash = new HashTable();
 
 hash.put('Ygritte', 'ygritte@yahoo.com');
