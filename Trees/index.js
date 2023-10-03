@@ -20,6 +20,10 @@ tree.insert(6)
 
 const cons=(data)=> console.log(data)
 tree.preOrderTransverse(cons)
+console.log(tree.min())
+console.log(tree.max())
+console.log(tree.find(72) ? 'Key 72 found': 'Key 72 not found')
+console.log(tree.find(18) ? 'Key 18 found': 'Key 18 not found')
 
 
 

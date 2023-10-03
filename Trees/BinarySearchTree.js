@@ -53,6 +53,59 @@ export default class BinarySearchTree{
     }
 
     preOrderTransverse(clbFn){
-        this.#preOderTrasnverseNode(this.#root, clbFn)
+        this.#preOderTrasnverseNode(this.#root, clbFn);
+    }
+
+    #posOrderTransverseNode(node, clbnFn){
+        if(node!=null){
+            this.#posOrderTransverseNode(node.left, clbnFn);
+            this.#posOrderTransverseNode(node.right, clbnFn);
+            clbnFn(node.key);
+        }
+    }
+
+    postOrderTransverse(clbFn){
+        this.#posOrderTransverseNode(this.#root, clbFn);
+    }
+
+    #minNode(node){
+        let current=node;
+        while(current!=null && current.left!=null){
+            current=current.left;
+        }
+        return current;
+    }
+
+    min(){
+        return this.#minNode(this.#root)
+    }
+
+    #maxNode(node){
+        let current=node;
+        while(current!=null && current.left!=null){
+            current=current.right;
+        }
+        return current
+    }
+
+    max(){
+        return this.#maxNode(this.root)
+    }
+
+    #findNode(node,key){
+        if(node===null){
+            return false;
+        }
+        if(this.compareFn(key, node.key)=== Compare.LESS_THAN){
+            return this.#findNode(node.left, key);
+        }else if(this.compareFn(key, node.key)===Compare.BIGGER_THAN){
+            return this.#findNode(node.right, key);
+        }else{
+            return true;
+        }
+    }
+
+    find(key){
+        return this.#findNode(this.#root, key);
     }
 }
