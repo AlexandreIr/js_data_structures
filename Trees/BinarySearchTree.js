@@ -138,4 +138,8 @@ export default class BinarySearchTree{
             return node;
         }
     }
+
+    remove(key){
+        this.#root=this.#removeNode(this.#root, key);
+    }
 }
