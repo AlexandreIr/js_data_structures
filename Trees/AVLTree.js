@@ -1,4 +1,4 @@
-import { BalanceFactor, defaultCompare } from "../Aux_classes/Utils.js";
+import { BalanceFactor, Compare, TreeNode, defaultCompare } from "../Aux_classes/Utils.js";
 import BinarySearchTree from "./BinarySearchTree.js";
 
 export default class AVLTree extends BinarySearchTree{
@@ -54,5 +54,38 @@ export default class AVLTree extends BinarySearchTree{
     #rotationRL(node){
         node.right=this.#rotationLL(node.right);
         return this.#rotationRR(node);
+    }
+
+    #insertNode(node,key){
+        if(node==null){
+            return new TreeNode(key);
+        }else if(this.compareFn(key, node.key)===Compare.LESS_THAN){
+            node.left=this.#insertNode(node.left, key);
+        }else if(this.compareFn(key, node.key)===Compare.BIGGER_THAN){
+            node.right=this.#insertNode(node.right, key);
+        }else{
+            return node;
+        }
+
+        const balanceFactor=this.getBalanceFactor(node);
+        if(balanceFactor===BalanceFactor.UNBALANCED_LEFT){
+            if(this.compareFn(key, node.left.key)===Compare.LESS_THAN){
+                node=this.#rotationLL(node);
+            }else{
+                return this.#rotationLR(node);
+            }
+        }
+        if(balanceFactor===BalanceFactor.UNBALANCED_RIGHT){
+            if(this.compareFn(key,node.right.key)===Compare.BIGGER_THAN){
+                node=this.#rotationRR(node);
+            }else{
+                return this.#rotationRL(node);
+            }
+        }
+        return node;
+    }
+
+    insert(key){
+        this.root=this.#insertNode(this.root, key);
     }
 }
