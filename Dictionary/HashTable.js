@@ -8,7 +8,7 @@ export class HashTable{
         this.table={};
     }
 
-    loseloseHashCode(key){
+    #loseloseHashCode(key){
         if(typeof key==='number'){
             return key;
         }
@@ -21,7 +21,7 @@ export class HashTable{
     }
 
     hashCode(key){
-        return this.loseloseHashCode(key);
+        return this.#loseloseHashCode(key);
     }
 
     put(key, value){

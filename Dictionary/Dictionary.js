@@ -32,20 +32,20 @@ export class Dictionary{
         return ValuePair == null ? undefined : ValuePair.value;
     }
 
-    keyValues(){
+    #keyValues(){
         return Object.values(this.table);
     }
 
     keys(){
-        return this.keyValues().map(ValuePair=>ValuePair.key);
+        return this.#keyValues().map(ValuePair=>ValuePair.key);
     }
 
     values(){
-        return this.keyValues().map(ValuePair=>ValuePair.value);
+        return this.#keyValues().map(ValuePair=>ValuePair.value);
     }
 
     forEach(callbackFn){
-        const valuesPairs=this.keyValues();
+        const valuesPairs=this.#keyValues();
         for(let i=0;i<valuesPairs.length;i++){
             const result=callbackFn(valuesPairs[i].key, valuesPairs[i].value);
             if(result===false){
@@ -59,7 +59,7 @@ export class Dictionary{
     }
 
     size(){
-        return this.keyValues().length;
+        return this.#keyValues().length;
     }
 
     isEmpty(){
@@ -70,7 +70,7 @@ export class Dictionary{
         if(this.isEmpty()){
             return '';
         }
-        const valuePairs=this.keyValues();
+        const valuePairs=this.#keyValues();
         let objString=`${valuePairs[0].toString()}`;
         for(let i=1;i<valuePairs.length;i++){
             objString=`${objString}, ${valuePairs[i].toString()}`;
