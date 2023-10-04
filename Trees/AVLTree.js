@@ -88,4 +88,34 @@ export default class AVLTree extends BinarySearchTree{
     insert(key){
         this.root=this.#insertNode(this.root, key);
     }
+
+    removeNode(node, key){
+        node=super.remove(key);
+        if(node==null){
+            return node;
+        }
+
+        const balanceFactor=this.getBalanceFactor(node);
+        if(balanceFactor===BalanceFactor.UNBALANCED_LEFT){
+            const balanceFactorLeft=this.getBalanceFactor(node.left);
+            if(balanceFactorLeft===BalanceFactor.BALANCED||
+                balanceFactorLeft===BalanceFactor.SLIGHTLY_UNBALANCED_LEFT){
+                    return this.#rotationLL(node);
+                }
+            if(balanceFactorLeft===BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT){
+                return this.#rotationLR(node.left);
+            }
+        }
+        if(balanceFactor===BalanceFactor.UNBALANCED_RIGHT){
+            const balanceFactorRight=this.getBalanceFactor(node.right);
+            if(balanceFactorRight===BalanceFactor.BALANCED||
+                balanceFactorRight===BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT){
+                    return this.#rotationRR(node);
+                }
+            if(balanceFactor===BalanceFactor.SLIGHTLY_UNBALANCED_LEFT){
+                return this.#rotationRL(node.right)
+            }
+        }
+        return node;
+    }
 }
